@@ -1,3 +1,4 @@
+from models import CURSOR, CONN 
 from models.book import Book
 from models.author import Author
 from models.member import Member
@@ -19,3 +20,5 @@ print("Found:", found)
 
 member = Member(name="Kyle")
 member.save()
+
+print("Debug Complete:)")

@@ -1,6 +1,4 @@
 from models import CURSOR, CONN 
-from models.author import Author
-from models.member import Member 
 
 class Book:
     

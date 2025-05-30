@@ -34,3 +34,9 @@ class Member:
         if row:
             return cls(id=row[0], name=row[1])
         return None
+    
+    @classmethod
+    def all(cls):
+        CURSOR.execute("SELECT * FROM members")
+        rows = CURSOR.fetchall()
+        return [cls(id=row[0], name=row[1]) for row in rows]
