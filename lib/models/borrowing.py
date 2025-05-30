@@ -12,7 +12,7 @@ class Borrowing:
                 FOREIGN KEY(member_id) REFERENCES members(id)
             );
         """
-        CURSOR.execut(sql)
+        CURSOR.execute(sql)
         CONN.commit()
         CONN.close()
 
@@ -23,7 +23,6 @@ class Borrowing:
             (book_id, member_id)
         )
         CONN.commit()
-        CONN.close()
 
     @classmethod
     def borrowed_books(cls):

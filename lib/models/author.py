@@ -18,7 +18,6 @@ class Author:
         """
         CURSOR.execute(sql)
         CONN.commit()
-        CONN.close()
 
     def save(self):
         if self.id is None:
@@ -27,4 +26,3 @@ class Author:
         else:
             CURSOR.execute("UPDATE authors SET name = ? WHERE id = ?", (self.name, self.id))
         CONN.commit()
-        CONN.close()

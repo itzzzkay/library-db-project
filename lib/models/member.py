@@ -18,7 +18,6 @@ class Member:
         """
         CURSOR.execute(sql)
         CONN.commit()
-        CONN.close()
 
     def save(self):
         if self.id is None:
@@ -27,7 +26,6 @@ class Member:
         else:
             CURSOR.execute("UPDATE members SET name = ? WHERE id = ?", (self.name, self.id))
         CONN.commit()
-        CONN.close()
 
     @classmethod
     def find_by_name(cls, name):

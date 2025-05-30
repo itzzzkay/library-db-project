@@ -22,7 +22,7 @@ class Book:
         """
         CURSOR.execute(sql)
         CONN.commit()
-        CONN.close()
+
 
     @classmethod
     def drop_table(cls):
@@ -31,7 +31,6 @@ class Book:
         """
         CURSOR.execute(sql)
         CONN.commit()
-        CONN.close()
 
     def save(self):
         if self.id is None:
@@ -46,7 +45,6 @@ class Book:
                 (self.name, self.author, self.id)
             )
         CONN.commit()
-        CONN.close()
 
     @classmethod
     def find_by_name(cls, name):
