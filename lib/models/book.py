@@ -22,6 +22,7 @@ class Book:
         """
         CURSOR.execute(sql)
         CONN.commit()
+        CONN.close()
 
     @classmethod
     def drop_table(cls):
@@ -30,3 +31,35 @@ class Book:
         """
         CURSOR.execute(sql)
         CONN.commit()
+        CONN.close()
+
+    def save(self):
+        if self.id is None:
+            CURSOR.execute(
+                "INSERT INTO books (name, author) VALUES (?, ?)",
+                (self.name, self.author)
+            )
+            self.id = CURSOR.lastrowid
+        else:
+            CURSOR.execute(
+                "UPDATE books SET name = ?, author = ? WHERE id = ?",
+                (self.name, self.author, self.id)
+            )
+        CONN.commit()
+        CONN.close()
+
+    @classmethod
+    def find_by_name(cls, name):
+        CURSOR.execute("SELECT * FROM books WHERE name = ? LIMIT 1", (name,))
+        row = CURSOR.fetchone()
+        if row:
+            return cls(id=row[0], name=row[1], author=row[2])
+        return None
+    
+    @classmethod
+    def all(cls):
+        CURSOR.execute("SELECT * FROM books")
+        rows = CURSOR.fetchall()
+        return [cls(id=row[0], name=row[1], author=row[2]) for row in rows]
+    
+    
