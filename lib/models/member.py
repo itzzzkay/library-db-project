@@ -29,4 +29,10 @@ class Member:
         CONN.commit()
         CONN.close()
 
-    def find_by_name
+    @classmethod
+    def find_by_name(cls, name):
+        CURSOR.execute("SELECT * FROM members WHERE name = ?", (name,))
+        row = CURSOR.fetchone()
+        if row:
+            return cls(id=row[0], name=row[1])
+        return None
