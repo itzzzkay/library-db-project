@@ -1,6 +1,6 @@
 from models import CURSOR, CONN
 
-class Borrowing: 
+class Borrowing:
     @classmethod
     def create_table(cls):
         sql = """
@@ -8,13 +8,12 @@ class Borrowing:
                 id INTEGER PRIMARY KEY,
                 book_id INTEGER,
                 member_id INTEGER,
-                FOREIGN KEY(book_id) REFERENCES books(id)
+                FOREIGN KEY(book_id) REFERENCES books(id),
                 FOREIGN KEY(member_id) REFERENCES members(id)
             );
         """
         CURSOR.execute(sql)
         CONN.commit()
-        CONN.close()
 
     @classmethod
     def borrow(cls, book_id, member_id):
@@ -33,4 +32,9 @@ class Borrowing:
             JOIN members ON borrowings.member_id = members.id;
         """
         CURSOR.execute(sql)
+        return CURSOR.fetchall()
+
+    @classmethod
+    def all(cls):
+        CURSOR.execute("SELECT * FROM borrowings")
         return CURSOR.fetchall()

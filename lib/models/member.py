@@ -34,7 +34,15 @@ class Member:
         if row:
             return cls(id=row[0], name=row[1])
         return None
-    
+
+    @classmethod
+    def find_by_id(cls, id):
+        CURSOR.execute("SELECT * FROM members WHERE id = ?", (id,))
+        row = CURSOR.fetchone()
+        if row:
+            return cls(id=row[0], name=row[1])
+        return None
+
     @classmethod
     def all(cls):
         CURSOR.execute("SELECT * FROM members")

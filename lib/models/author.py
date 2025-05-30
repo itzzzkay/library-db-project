@@ -26,3 +26,11 @@ class Author:
         else:
             CURSOR.execute("UPDATE authors SET name = ? WHERE id = ?", (self.name, self.id))
         CONN.commit()
+
+    @classmethod
+    def find_by_name(cls, name):
+        CURSOR.execute("SELECT * FROM authors WHERE name = ?", (name,))
+        row = CURSOR.fetchone()
+        if row:
+            return cls(id=row[0], name=row[1])
+        return None

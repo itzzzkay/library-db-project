@@ -1,3 +1,4 @@
+from models import CURSOR, CONN
 from models.book import Book
 from models.author import Author
 from models.member import Member
@@ -20,6 +21,7 @@ from helpers import (
 )
 
 def main():
+    tables()
     while True:
         menu()
         choice = input("> ")
@@ -34,13 +36,11 @@ def main():
         elif choice == "4":
             borrow_book()
         elif choice == "5":
-            list_borrowed
+            list_borrowed()
         elif choice == "6":
-            list_members
-
+            list_members()
         else:
             print("Invalid choice")
-
 
 def menu():
     print("Please select an option:")
@@ -51,10 +51,6 @@ def menu():
     print("4. Borrow Book")
     print("5. List Borrowed Books")
     print("6. List All Members")
-
-def run():
-    tables()
-
 
 if __name__ == "__main__":
     main()
